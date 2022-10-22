@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block contenedor_principal %}
+
+<form class="form-control"  method="POST" >
+  <div class="mb-3">
+    <label for="usos" class="form-label">Usos</label>
+    <input type="text" name="nombre" value="{{uso.nombre}}" class="form-control" >
+  </div>
+
+  <button type="submit" class="btn btn-primary" >Editar</button>
+</form>
+
+{% endblock %}
+
