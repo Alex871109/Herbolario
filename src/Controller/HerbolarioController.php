@@ -44,9 +44,51 @@ class HerbolarioController extends AbstractController
             return $this->redirectToRoute('app_herbolario');
 
         }
-        return $this->render('herbolario/herbolario_nuevo.html.twig', []);
+        return $this->render('herbolario/herbolario_nuevo.html.twig', [
+            'accion'=>false,
+        ]);
     }
 
+    #[Route('/herbolario/{id}/editar',name:'app_editar_herbolario')]
+    public function editar(Herbolario $herbolario,Request $request,EntityManagerInterface $entityManager): Response
+    {
+        if($request->getMethod()==='POST'){
+            $nombre=$request->request->get('nombre');
+            $url=$request->request->get('url'); 
+            $nombre=trim($nombre);
+            $url=trim($url);  
+                if($nombre!="" && $url!=""){
+                    $herbolario->setNombre($nombre);
+                    $herbolario->setUrl($url);
+
+                    $entityManager->flush();
+                    $this->addFlash('success','Herbolario correctamente editado');
+                }
+                else
+                    $this->addFlash('danger','Los campos no pueden estar en blanco');
+
+            return $this->redirectToRoute('app_herbolario');
+        }
+        dump($herbolario);
+
+        return $this->render('herbolario/herbolario_editar.html.twig', [
+            'accion'=>true,
+            'herbolario'=>$herbolario,
+        ]);
+    }
+
+    #[Route('/herbolario/{id}/eliminar',name:'app_eliminar_herbolario')]
+    public function eliminar(Herbolario $herbolario,Request $request,EntityManagerInterface $entityManager): Response
+    {
+        if($request->getMethod()==='POST'){
+            $entityManager->remove($herbolario);
+            $entityManager->flush();
+            $this->addFlash('success','Herbolario correctamente eliminado');
+            return $this->redirectToRoute('app_herbolario');
+
+        }
+     
+    }
 
 
 }
