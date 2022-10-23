@@ -44,7 +44,9 @@ class UsosController extends AbstractController
         return $this->redirectToRoute('app_usos');
 
         }
-        return $this->render('usos/usos_nuevo.html.twig', []);
+        return $this->render('usos/usos_nuevo.html.twig', [
+            'accion' => false,
+        ]);
     }
 
 
@@ -70,6 +72,7 @@ class UsosController extends AbstractController
             
         return $this->render('usos/usos_editar.html.twig', [
             'uso' => $uso,
+            'accion' => true,  // accion editar para que se modifique el boton del template, el del submit
         ]);
     }
 

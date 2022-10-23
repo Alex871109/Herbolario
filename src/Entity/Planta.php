@@ -139,6 +139,7 @@ class Planta
         }
 
         return $this;
+        
     }
 
     public function removeHerbolarioid(Herbolario $herbolarioid): self

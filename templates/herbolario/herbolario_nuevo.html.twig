@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block contenedor_principal %}
+
+<form class="form-control"  method="POST" >
+  <div class="mb-3">
+    <h1 class="form-label">Hebolario</h1>
+  </div>
+  <div class="mb-3">
+    <label for="herbolarionombre" class="form-label">Nombre</label>
+    <input type="text" name="nombre" class="form-control" >
+  </div>
+    <div class="mb-3">
+    <label for="URL" class="form-label">URL</label>
+    <input type="text" name="url" class="form-control" >
+  </div>
+
+  <button type="submit" class="btn btn-primary" >Añadir</button>
+</form>
+
+{% endblock %}
+
