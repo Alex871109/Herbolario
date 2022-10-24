@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Planta
  *
  * @ORM\Table(name="planta")
- * @ORM\Entity(repositoryClass= PlantaRepository::class)
+ * @ORM\Entity(repositoryClass=PlantaRepository::Class)
  */
 class Planta
 {
@@ -47,21 +47,6 @@ class Planta
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Herbolario", inversedBy="plantaid")
-     * @ORM\JoinTable(name="infocomercial",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="PlantaID", referencedColumnName="ID")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="HerbolarioID", referencedColumnName="ID")
-     *   }
-     * )
-     */
-    private $herbolarioid = array();
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\ManyToMany(targetEntity="Usos", inversedBy="planta")
      * @ORM\JoinTable(name="plantasusos",
      *   joinColumns={
@@ -79,7 +64,6 @@ class Planta
      */
     public function __construct()
     {
-        $this->herbolarioid = new \Doctrine\Common\Collections\ArrayCollection();
         $this->uso = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -120,31 +104,6 @@ class Planta
     public function setLugar(?string $lugar): self
     {
         $this->lugar = $lugar;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Herbolario>
-     */
-    public function getHerbolarioid(): Collection
-    {
-        return $this->herbolarioid;
-    }
-
-    public function addHerbolarioid(Herbolario $herbolarioid): self
-    {
-        if (!$this->herbolarioid->contains($herbolarioid)) {
-            $this->herbolarioid->add($herbolarioid);
-        }
-
-        return $this;
-        
-    }
-
-    public function removeHerbolarioid(Herbolario $herbolarioid): self
-    {
-        $this->herbolarioid->removeElement($herbolarioid);
 
         return $this;
     }

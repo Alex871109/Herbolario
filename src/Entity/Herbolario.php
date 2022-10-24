@@ -2,15 +2,14 @@
 
 namespace App\Entity;
 use App\Repository\HerbolarioRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Herbolario
  *
  * @ORM\Table(name="herbolario")
- * @ORM\Entity(repositoryClass= HerbolarioRepository::class)
+ * @ORM\Entity(repositoryClass=HerbolarioRepository::Class)
  */
 class Herbolario
 {
@@ -36,21 +35,6 @@ class Herbolario
      * @ORM\Column(name="URL", type="string", length=255, nullable=true)
      */
     private $url;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Planta", mappedBy="herbolarioid")
-     */
-    private $plantaid = array();
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->plantaid = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -81,31 +65,5 @@ class Herbolario
         return $this;
     }
 
-    /**
-     * @return Collection<int, Planta>
-     */
-    public function getPlantaid(): Collection
-    {
-        return $this->plantaid;
-    }
-
-    public function addPlantaid(Planta $plantaid): self
-    {
-        if (!$this->plantaid->contains($plantaid)) {
-            $this->plantaid->add($plantaid);
-            $plantaid->addHerbolarioid($this);
-        }
-
-        return $this;
-    }
-
-    public function removePlantaid(Planta $plantaid): self
-    {
-        if ($this->plantaid->removeElement($plantaid)) {
-            $plantaid->removeHerbolarioid($this);
-        }
-
-        return $this;
-    }
 
 }
