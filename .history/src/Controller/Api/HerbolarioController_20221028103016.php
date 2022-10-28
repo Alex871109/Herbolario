@@ -4,7 +4,6 @@ namespace App\Controller\Api;
 
 use App\Entity\Herbolario;
 use App\Repository\HerbolarioRepository;
-use App\Repository\InfocomercialRepository;
 use App\Services\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\JsonDecoder;
@@ -52,16 +51,14 @@ class HerbolarioController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'api_herbolario_delete', methods: ['DELETE'])]
-    public function delete(HerbolarioRepository $herbolarioRepository,InfocomercialRepository $infocomercialRepository, Manager $manager, int $id): JsonResponse
+    public function delete(HerbolarioRepository $herbolarioRepository,Infoc Manager $manager, int $id): JsonResponse
     {
         $herbolario=$herbolarioRepository->findOneById($id);
         if(!$herbolario)
             throw $this->createNotFoundException('Herbolario not found');
         
         try {
-            $infocomercial_herbolario=$infocomercialRepository->findByHerbolarioid($herbolario);
-            foreach($infocomercial_herbolario as $herbolario_row)
-                $manager->delete($herbolario_row,$infocomercialRepository);
+            
             $manager->delete($herbolario,$herbolarioRepository);
             $status = 200;
             $response = 'success';

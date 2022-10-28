@@ -40,15 +40,15 @@ class InfocomercialRepository extends ServiceEntityRepository
         }
     }
 
-    // public function findbyHerbolario(Herbolario $herbolario)
-    // {
-    //     return $this->createQueryBuilder('ic')
-    //             ->innerJoin('h.categoria','c')
-    //             ->where('c.nombre = :nombreCategoria')
-    //             ->setParameter('nombreCategoria', $nombreCategoria)
-    //             ->getQuery()
-    //             ->getResult();
-    // }
+    public function findbyHerbolario(Herbolario $herbolario)
+    {
+        return $this->createQueryBuilder('ic')
+                ->innerJoin('m.categoria','c')
+                ->where('c.nombre = :nombreCategoria')
+                ->setParameter('nombreCategoria', $nombreCategoria)
+                ->getQuery()
+                ->getResult();
+    }
 
 
 //    /**

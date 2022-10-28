@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Herbolario;
 use App\Entity\Infocomercial;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -40,15 +39,15 @@ class InfocomercialRepository extends ServiceEntityRepository
         }
     }
 
-    // public function findbyHerbolario(Herbolario $herbolario)
-    // {
-    //     return $this->createQueryBuilder('ic')
-    //             ->innerJoin('h.categoria','c')
-    //             ->where('c.nombre = :nombreCategoria')
-    //             ->setParameter('nombreCategoria', $nombreCategoria)
-    //             ->getQuery()
-    //             ->getResult();
-    // }
+    public function findbyHerbolario(H $nombreCategoria)
+    {
+        return $this->createQueryBuilder('m')
+                ->innerJoin('m.categoria','c')
+                ->where('c.nombre = :nombreCategoria')
+                ->setParameter('nombreCategoria', $nombreCategoria)
+                ->getQuery()
+                ->getResult();
+    }
 
 
 //    /**

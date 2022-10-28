@@ -59,7 +59,7 @@ class HerbolarioController extends AbstractController
             throw $this->createNotFoundException('Herbolario not found');
         
         try {
-            $infocomercial_herbolario=$infocomercialRepository->findByHerbolarioid($herbolario);
+            $infocomercial_herbolario=$infocomercialRepository->findById($herbolario);
             foreach($infocomercial_herbolario as $herbolario_row)
                 $manager->delete($herbolario_row,$infocomercialRepository);
             $manager->delete($herbolario,$herbolarioRepository);
