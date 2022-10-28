@@ -23,14 +23,12 @@ Class Manager
     {
         $error=false;
         foreach($data as $key=>$value){
-            $attr=ucfirst($key);
-            if('Id'!==$attr){           //El Id nunca debe modificarse
-                    $method='set'.$attr;
-                if(method_exists($entity,$method))
-                    $entity->$method($value);            
-                else
-                    $error=true; 
-            }           
+            if
+            $method='set'.ucfirst($key);
+            if(method_exists($entity,$method))
+                $entity->$method($value);            
+            else
+                $error=true;            
         }
         if(!$error){
             $this->entityManager->flush();

@@ -24,7 +24,7 @@ Class Manager
         $error=false;
         foreach($data as $key=>$value){
             $attr=ucfirst($key);
-            if('Id'!==$attr){           //El Id nunca debe modificarse
+            if('Id'!==$attr){           //
                     $method='set'.$attr;
                 if(method_exists($entity,$method))
                     $entity->$method($value);            

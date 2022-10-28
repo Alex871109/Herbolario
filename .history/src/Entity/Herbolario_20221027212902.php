@@ -41,9 +41,9 @@ class Herbolario
         return $this->id;
     }
 
-    public function setId(?int $id): self
+    public function setNombre(?string $nombre): self
     {
-        $this->id = $id;
+        $this->nombre = $nombre;
 
         return $this;
     }

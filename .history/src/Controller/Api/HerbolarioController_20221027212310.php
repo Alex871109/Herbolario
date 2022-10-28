@@ -23,21 +23,33 @@ class HerbolarioController extends AbstractController
     #[Route('/index', name: 'api_herbolario_index', methods: ['GET'])]
     public function index(HerbolarioRepository $herbolarioRepository, Manager $manager): JsonResponse
     {
+        
         $herbolarios=$herbolarioRepository->findAll();
         $herbolarios_array= $manager->object_to_array($herbolarios);
         return $this->json(['herbolarios'=>$herbolarios_array],200);
+        // dump($herbolarios);
+        // dump($herbolarios_array);
+        // die();
     }
 
     #[Route('/edit_get/{id}',name:'api_edit_get_herbolario',methods:['GET', 'POST'])]
     public function edit_get(Request $request,int $id,EntityManagerInterface $entityManager, Manager $manager, HerbolarioRepository $herbolarioRepository): JsonResponse
     {
-        $herbolario=$herbolarioRepository->findOneById($id);
+        // $data_received=$request->getContent();
+        // dump(json_Decode($data_received, true)) ;
+        // die();
+        
+        
+        $herbolario=$herbolarioRepository->findById($id);
         if(!$herbolario)
             throw $this->createNotFoundException('Herbolario not found');
         $dataResponse=['herbolario'=>$manager->object_to_array($herbolario)];
-
+        dump($herbolario);
+        dump($manager->object_to_array($herbolario)[0]);
+    //    dump($manager->dismount($herbolario));
+      //  die();
        if($request->getMethod()==='POST'){
-            $data_received=json_Decode($request->getContent()); //$request->getContent devuelve en 1 json el contenido del post
+            $data_received=json_Decode($request->getContent());
             $save_operation=$manager->save($data_received,$herbolario);
             if($save_operation['error'])
                 $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'herbolario' => null];
