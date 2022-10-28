@@ -33,7 +33,7 @@ Class Manager
             }           
         }
         if(!$error){
-            $this->entityManager->persist($entity);
+            $this->entityManager->persist($)
             $this->entityManager->flush();
         }
         else

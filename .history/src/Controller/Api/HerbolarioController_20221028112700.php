@@ -59,9 +59,9 @@ class HerbolarioController extends AbstractController
             throw $this->createNotFoundException('Herbolario not found');
         
         try {
-            $infocomercial_herbolario=$infocomercialRepository->findByHerbolarioid($herbolario);
+            $infocomercial_herbolario=$infocomercialRepository->findById($herbolario);
             foreach($infocomercial_herbolario as $herbolario_row)
-                $manager->delete($herbolario_row,$infocomercialRepository);
+                
             $manager->delete($herbolario,$herbolarioRepository);
             $status = 200;
             $response = 'success';
@@ -76,19 +76,5 @@ class HerbolarioController extends AbstractController
         
     }
 
-
-    #[Route('/new', name: 'api_herbolario_new', methods: ['POST'])]
-    public function new(HerbolarioRepository $herbolarioRepository,Request $request, Manager $manager): JsonResponse
-    {
-        $herbolario=new Herbolario();
-        $data_received=json_Decode($request->getContent());
-        $save_operation=$manager->save($data_received,$herbolario);
-            if($save_operation['error'])
-                $dataResponse = ['status' => 500, 'response' => 'fail'];
-            else
-                $dataResponse = ['status' => 200, 'response' => 'success', 'new herbolario'=> $save_operation['entity']];
-
-        return $this->json($dataResponse,200);
-    }
 
 }

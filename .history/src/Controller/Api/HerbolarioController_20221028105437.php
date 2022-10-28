@@ -51,7 +51,7 @@ class HerbolarioController extends AbstractController
         
     }
 
-    #[Route('/delete/{id}', name: 'api_herbolario_delete', methods: ['DELETE'])]
+    #[Route('/delete/{id}', name: 'api_herbolario_delete', methods: ['POST'])]
     public function delete(HerbolarioRepository $herbolarioRepository,InfocomercialRepository $infocomercialRepository, Manager $manager, int $id): JsonResponse
     {
         $herbolario=$herbolarioRepository->findOneById($id);
@@ -77,18 +77,12 @@ class HerbolarioController extends AbstractController
     }
 
 
-    #[Route('/new', name: 'api_herbolario_new', methods: ['POST'])]
-    public function new(HerbolarioRepository $herbolarioRepository,Request $request, Manager $manager): JsonResponse
+    #[Route('/new', name: 'api_herbolario_new', methods: ['GET'])]
+    public function index(HerbolarioRepository $herbolarioRepository, Manager $manager): JsonResponse
     {
-        $herbolario=new Herbolario();
-        $data_received=json_Decode($request->getContent());
-        $save_operation=$manager->save($data_received,$herbolario);
-            if($save_operation['error'])
-                $dataResponse = ['status' => 500, 'response' => 'fail'];
-            else
-                $dataResponse = ['status' => 200, 'response' => 'success', 'new herbolario'=> $save_operation['entity']];
-
-        return $this->json($dataResponse,200);
+        $herbolarios=$herbolarioRepository->findAll();
+        $herbolarios_array= $manager->object_to_array($herbolarios);
+        return $this->json(['herbolarios'=>$herbolarios_array],200);
     }
 
 }

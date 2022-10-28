@@ -77,7 +77,7 @@ class HerbolarioController extends AbstractController
     }
 
 
-    #[Route('/new', name: 'api_herbolario_new', methods: ['POST'])]
+    #[Route('/new', name: 'api_herbolario_new', methods: ['POS'])]
     public function new(HerbolarioRepository $herbolarioRepository,Request $request, Manager $manager): JsonResponse
     {
         $herbolario=new Herbolario();

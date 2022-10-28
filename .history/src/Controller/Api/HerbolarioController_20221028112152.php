@@ -78,7 +78,7 @@ class HerbolarioController extends AbstractController
 
 
     #[Route('/new', name: 'api_herbolario_new', methods: ['POST'])]
-    public function new(HerbolarioRepository $herbolarioRepository,Request $request, Manager $manager): JsonResponse
+    public function new(HerbolarioRepository $herbolarioRepository, Manager $manager, Request $request): JsonResponse
     {
         $herbolario=new Herbolario();
         $data_received=json_Decode($request->getContent());
@@ -89,6 +89,7 @@ class HerbolarioController extends AbstractController
                 $dataResponse = ['status' => 200, 'response' => 'success', 'new herbolario'=> $save_operation['entity']];
 
         return $this->json($dataResponse,200);
+        
     }
 
-}
+    
