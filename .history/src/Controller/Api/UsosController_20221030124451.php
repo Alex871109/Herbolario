@@ -31,27 +31,7 @@ class UsosController extends AbstractController
         return $this->json(['usos'=>$usos_array],200);
     }
 
-    #[Route('/edit_get/{id}',name:'api_edit_get_usos',methods:['GET', 'POST'])]
-    public function edit_get(Request $request,int $id,EntityManagerInterface $entityManager, Manager $manager, UsosRepository $usosRepository): JsonResponse
-    {
-        $uso=$usosRepository->findOneById($id);
-        if(!$uso)
-            throw $this->createNotFoundException('Uso not found');
-        $dataResponse=['uso'=>$manager->object_to_array($uso,'basic')];
-
-       if($request->getMethod()==='POST'){
-            $data_received=json_Decode($request->getContent()); //$request->getContent devuelve en 1 json el contenido del post
-            $save_operation=$manager->save($data_received,$uso);
-            if($save_operation['error'])
-                $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'uso' => null];
-            else
-                $dataResponse=['status'=>200,'response'=>'success', 'method'=>'POST','uso'=>$manager->object_to_array($save_operation['entity'],'basic')];
-  
-        }
-
-            return $this->json($dataResponse,200);
-        
-    }
+    
 
 
 }

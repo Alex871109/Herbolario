@@ -41,7 +41,7 @@ class UsosController extends AbstractController
 
        if($request->getMethod()==='POST'){
             $data_received=json_Decode($request->getContent()); //$request->getContent devuelve en 1 json el contenido del post
-            $save_operation=$manager->save($data_received,$uso);
+            $save_operation=$manager->save($data_received,$usos);
             if($save_operation['error'])
                 $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'uso' => null];
             else

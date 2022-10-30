@@ -32,20 +32,20 @@ class UsosController extends AbstractController
     }
 
     #[Route('/edit_get/{id}',name:'api_edit_get_usos',methods:['GET', 'POST'])]
-    public function edit_get(Request $request,int $id,EntityManagerInterface $entityManager, Manager $manager, UsosRepository $usosRepository): JsonResponse
+    public function edit_get(Request $request,int $id,EntityManagerInterface $entityManager, Manager $manager, HerbolarioRepository $herbolarioRepository): JsonResponse
     {
-        $uso=$usosRepository->findOneById($id);
-        if(!$uso)
-            throw $this->createNotFoundException('Uso not found');
-        $dataResponse=['uso'=>$manager->object_to_array($uso,'basic')];
+        $herbolario=$herbolarioRepository->findOneById($id);
+        if(!$herbolario)
+            throw $this->createNotFoundException('Herbolario not found');
+        $dataResponse=['herbolario'=>$manager->object_to_array($herbolario,'basic')];
 
        if($request->getMethod()==='POST'){
             $data_received=json_Decode($request->getContent()); //$request->getContent devuelve en 1 json el contenido del post
-            $save_operation=$manager->save($data_received,$uso);
+            $save_operation=$manager->save($data_received,$herbolario);
             if($save_operation['error'])
-                $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'uso' => null];
+                $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'herbolario' => null];
             else
-                $dataResponse=['status'=>200,'response'=>'success', 'method'=>'POST','uso'=>$manager->object_to_array($save_operation['entity'],'basic')];
+                $dataResponse=['status'=>200,'response'=>'success', 'method'=>'POST','herbolario'=>$manager->object_to_array($save_operation['entity'],'basic')];
   
         }
 
