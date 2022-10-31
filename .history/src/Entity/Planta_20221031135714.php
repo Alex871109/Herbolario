@@ -39,7 +39,7 @@ class Planta
      *
      * @ORM\Column(name="Nombre", type="string", length=100, nullable=false)
      * @Groups("basic")
-     * @Groups("form_planta")
+     * 
      */
     private $nombre;
 
@@ -47,7 +47,6 @@ class Planta
      * @var string|null
      *
      * @ORM\Column(name="Lugar", type="string", length=255, nullable=true)
-     * @Groups("form_planta")
      */
     private $lugar;
 
@@ -63,7 +62,6 @@ class Planta
      *     @ORM\JoinColumn(name="Uso", referencedColumnName="ID")
      *   }
      * )
-     * @Groups("form_planta")
      */
    
     private $uso = array();

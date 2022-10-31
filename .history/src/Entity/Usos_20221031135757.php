@@ -34,7 +34,7 @@ class Usos
      *
      * @ORM\Column(name="Nombre", type="string", length=255, nullable=true)
      * @Groups("basic")
-     * @Groups("form_planta")
+     * 
      */
     
     private $nombre;

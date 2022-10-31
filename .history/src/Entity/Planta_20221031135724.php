@@ -63,7 +63,6 @@ class Planta
      *     @ORM\JoinColumn(name="Uso", referencedColumnName="ID")
      *   }
      * )
-     * @Groups("form_planta")
      */
    
     private $uso = array();
