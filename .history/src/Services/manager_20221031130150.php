@@ -38,7 +38,7 @@ Class Manager
                 if(method_exists($entity,$setmethod))
                     $entity->$setmethod($value); 
                 elseif(method_exists($entity,$addmethod))  
-                    $entity->$addmethod($value);    
+                $entity->$setmethod($value);    
                 else
                     $error=true; 
             }           

@@ -85,7 +85,7 @@ class UsosController extends AbstractController
     {
         $uso=new Usos();
         $data_received=json_Decode($request->getContent());
-        $save_operation=$manager->save($data_received,$uso);
+        $save_operation=$manager->save($data_received,$herbolario);
             if($save_operation['error'])
                 $dataResponse = ['status' => 500, 'response' => 'fail'];
             else

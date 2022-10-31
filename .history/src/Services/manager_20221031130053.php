@@ -37,8 +37,7 @@ Class Manager
                 $addmethod='add'.$attr;
                 if(method_exists($entity,$setmethod))
                     $entity->$setmethod($value); 
-                elseif(method_exists($entity,$addmethod))  
-                    $entity->$addmethod($value);    
+                elseif()           
                 else
                     $error=true; 
             }           

@@ -83,9 +83,9 @@ class UsosController extends AbstractController
     #[Route('/new', name: 'api_usos_new', methods: ['POST'])]
     public function new(UsosRepository $herbolarioRepository,Request $request, Manager $manager): JsonResponse
     {
-        $uso=new Usos();
+        $uso=new Herbolario();
         $data_received=json_Decode($request->getContent());
-        $save_operation=$manager->save($data_received,$uso);
+        $save_operation=$manager->save($data_received,$herbolario);
             if($save_operation['error'])
                 $dataResponse = ['status' => 500, 'response' => 'fail'];
             else
