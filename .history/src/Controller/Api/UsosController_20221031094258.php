@@ -62,11 +62,10 @@ class UsosController extends AbstractController
             throw $this->createNotFoundException('Uso not found');
         
         try {
-            $plantas=$plantaRepository->findByUso($uso); //Metodo mio, no de symfony
+            $plantas=$plantaRepository->findByUso($uso);
             foreach($plantas as $planta)
-               $planta->removeUso($uso);
-            $manager->update();
-            $manager->delete($uso,$usosRepository);
+                $manager->delete($herbolario_row,$infocomercialRepository);
+            $manager->delete($herbolario,$herbolarioRepository);
             $status = 200;
             $response = 'success';
         } catch (\Exception $exception) {
@@ -79,8 +78,6 @@ class UsosController extends AbstractController
         ], 200);
         
     }
-
-    
 
 
 }

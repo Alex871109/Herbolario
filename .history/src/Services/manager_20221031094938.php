@@ -52,11 +52,7 @@ Class Manager
     }
 
 
-    public function update()
-    {
-        $this->entityManager->flush();
-
-    }
+    public function update($entity,$repository)
 
 
     public function delete($entity,$repository)

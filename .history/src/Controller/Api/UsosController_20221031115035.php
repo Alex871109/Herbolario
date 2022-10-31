@@ -58,11 +58,15 @@ class UsosController extends AbstractController
     public function delete(UsosRepository $usosRepository,PlantaRepository $plantaRepository, Manager $manager, int $id): JsonResponse
     {
         $uso=$usosRepository->findOneById($id);
+        dump($uso);
+        
         if(!$uso)
             throw $this->createNotFoundException('Uso not found');
         
         try {
-            $plantas=$plantaRepository->findByUso($uso); //Metodo mio, no de symfony
+            $plantas=$plantaRepository->findByUso(['uso' => $uso]);
+            dump($plantas);
+            die();
             foreach($plantas as $planta)
                $planta->removeUso($uso);
             $manager->update();
@@ -79,8 +83,6 @@ class UsosController extends AbstractController
         ], 200);
         
     }
-
-    
 
 
 }

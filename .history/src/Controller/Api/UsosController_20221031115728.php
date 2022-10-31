@@ -80,7 +80,5 @@ class UsosController extends AbstractController
         
     }
 
-    
-
 
 }

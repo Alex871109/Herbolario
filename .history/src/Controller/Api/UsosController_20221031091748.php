@@ -3,7 +3,6 @@
 namespace App\Controller\Api;
 
 use App\Entity\Usos;
-use App\Repository\PlantaRepository;
 use App\Repository\UsosRepository;
 use App\Services\Manager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,19 +53,18 @@ class UsosController extends AbstractController
         
     }
 
-    #[Route('/delete/{id}', name: 'api_usos_delete', methods: ['DELETE'])]
-    public function delete(UsosRepository $usosRepository,PlantaRepository $plantaRepository, Manager $manager, int $id): JsonResponse
+    #[Route('/delete/{id}', name: 'api_herbolario_delete', methods: ['DELETE'])]
+    public function delete(HerbolarioRepository $herbolarioRepository,InfocomercialRepository $infocomercialRepository, Manager $manager, int $id): JsonResponse
     {
-        $uso=$usosRepository->findOneById($id);
-        if(!$uso)
-            throw $this->createNotFoundException('Uso not found');
+        $herbolario=$herbolarioRepository->findOneById($id);
+        if(!$herbolario)
+            throw $this->createNotFoundException('Herbolario not found');
         
         try {
-            $plantas=$plantaRepository->findByUso($uso); //Metodo mio, no de symfony
-            foreach($plantas as $planta)
-               $planta->removeUso($uso);
-            $manager->update();
-            $manager->delete($uso,$usosRepository);
+            $infocomercial_herbolario=$infocomercialRepository->findByHerbolarioid($herbolario);
+            foreach($infocomercial_herbolario as $herbolario_row)
+                $manager->delete($herbolario_row,$infocomercialRepository);
+            $manager->delete($herbolario,$herbolarioRepository);
             $status = 200;
             $response = 'success';
         } catch (\Exception $exception) {
@@ -79,8 +77,6 @@ class UsosController extends AbstractController
         ], 200);
         
     }
-
-    
 
 
 }

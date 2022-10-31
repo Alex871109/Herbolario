@@ -54,7 +54,7 @@ Class Manager
 
     public function update()
     {
-        $this->entityManager->flush();
+        
 
     }
 

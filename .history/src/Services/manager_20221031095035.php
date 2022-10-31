@@ -42,7 +42,7 @@ Class Manager
         }
         if(!$error){
             $this->entityManager->persist($entity);
-            $this->entityManager->flush();
+            update();
         }
         else
             $entity='';

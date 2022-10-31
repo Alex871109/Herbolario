@@ -42,8 +42,8 @@ class PlantaRepository extends ServiceEntityRepository
 
 
 
-    public function findByUso(Usos $uso)    //Como el miembro uso, es 1 collection, o sea un array, no existe el metodo magico findByUso
-{                                           // Este metodo lo hace a mano.    https://www.doctrine-project.org/projects/doctrine-orm/en/2.13/reference/working-with-associations.html#association-management-methods
+    public function findByUso(Usos $uso)
+{
     return $this->createQueryBuilder("p")
             ->where(':uso MEMBER OF p.uso')
             ->setParameters(array('uso' => $uso))

@@ -50,14 +50,7 @@ Class Manager
         return  ['error'=>$error,'entity'=>$entity];   
 
     }
-
-
-    public function update()
-    {
-        $this->entityManager->flush();
-
-    }
-
+    
 
     public function delete($entity,$repository)
     {
