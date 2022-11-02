@@ -3,7 +3,6 @@
 namespace App\Controller\Api;
 
 use App\Entity\Usos;
-use App\Repository\InfocomercialRepository;
 use App\Repository\PlantaRepository;
 use App\Repository\UsosRepository;
 use App\Services\Manager;
@@ -56,7 +55,7 @@ class PlantaController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'api_planta_delete', methods: ['DELETE'])]
-    public function delete(PlantaRepository $plantaRepository, InfocomercialRepository $infocomercialrepository, Manager $manager, int $id): JsonResponse
+    public function delete(UsosRepository $usosRepository,PlantaRepository $plantaRepository, Manager $manager, int $id): JsonResponse
     {
         $planta=$plantaRepository->findOneById($id);
         if(!$planta)
@@ -64,14 +63,9 @@ class PlantaController extends AbstractController
         
         try {
             $usos_from_planta=$planta->getUso();
-            foreach($usos_from_planta as $uso)
-                $planta->removeUso($uso);
-            $platas_from_infocomercial= $infocomercialrepository->findByPlantaid($planta);
-            // dump($plata_from_infocomercial); die;
-            foreach($platas_from_infocomercial as $row)
-                $manager->delete($row,$infocomercialrepository);
+            foreach($usos_from)
             $manager->update();
-            $manager->delete($planta,$plantaRepository);
+            $manager->delete($uso,$usosRepository);
             $status = 200;
             $response = 'success';
         } catch (\Exception $exception) {

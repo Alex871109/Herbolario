@@ -66,10 +66,10 @@ class PlantaController extends AbstractController
             $usos_from_planta=$planta->getUso();
             foreach($usos_from_planta as $uso)
                 $planta->removeUso($uso);
-            $platas_from_infocomercial= $infocomercialrepository->findByPlantaid($planta);
+            $plata_from_infocomercial= $infocomercialrepository->findByPlantaid($planta);
             // dump($plata_from_infocomercial); die;
-            foreach($platas_from_infocomercial as $row)
-                $manager->delete($row,$infocomercialrepository);
+            foreach($plata_from_infocomercial as $row)
+                $manager->delete($row,)
             $manager->update();
             $manager->delete($planta,$plantaRepository);
             $status = 200;
