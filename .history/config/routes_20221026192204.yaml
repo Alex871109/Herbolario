@@ -1,0 +1,7 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+controllers:
+    resource: ../src/Controller/Api
+    type: attribute

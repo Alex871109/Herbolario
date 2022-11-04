@@ -30,7 +30,6 @@ class UsosController extends AbstractController
         $usos= new Usos();
         if($request->getMethod()==='POST'){
         $nombre=$request->request->get('nombre'); 
-        //$nombre=u($nombre)->trim(); // Elimino los espacio en blanco . Para eso uso--->>> use function Symfony\Component\String\u;  
         $nombre=trim($nombre);  
             if($nombre!=""){
                 $usos->setNombre($nombre);
@@ -44,7 +43,9 @@ class UsosController extends AbstractController
         return $this->redirectToRoute('app_usos');
 
         }
-        return $this->render('usos/usos_nuevo.html.twig', []);
+        return $this->render('usos/usos_nuevo.html.twig', [
+            'accion' => false,
+        ]);
     }
 
 
@@ -70,7 +71,19 @@ class UsosController extends AbstractController
             
         return $this->render('usos/usos_editar.html.twig', [
             'uso' => $uso,
+            'accion' => true,  // accion editar para que se modifique el boton del template, el del submit
         ]);
+    }
+
+    #[Route('/usos/{id}/eliminar', name: 'app_usos_eliminar')]
+    public function eliminar(Usos $uso,UsosRepository $usosRepository,EntityManagerInterface $entityManager,Request $request): Response
+    {
+        if($request->getMethod()==='POST'){
+            $entityManager->remove($uso);
+            $entityManager->flush();
+            $this->addFlash('success', 'Uso eliminado correctamente');
+            return $this->redirectToRoute('app_usos');
+        }
     }
 
 

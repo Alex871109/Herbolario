@@ -1,0 +1,25 @@
+<form class="form-control"  method="POST" >
+  <div class="mb-3">
+    <h1 class="form-label">Planta</h1>
+  </div>
+  <div class="mb-3">
+    <label for="nombre"  class="form-label">Nombre</label>
+    <input type="text" name="nombre" {% if accion %} value="{{planta.nombre}}" {% endif %}  class="form-control" >
+  </div>
+  <div class="mb-3">
+    <label for="especie"    class="form-label">Especie</label>
+    <input type="text" name="especie" {% if accion %} value="{{planta.especie}}" {% endif %}  class="form-control" >
+  </div>
+  <div class="mb-3">
+    <label for="lugar"    class="form-label">Lugar de Origen</label>
+    <input type="text" name="lugar" {% if accion %} value="{{planta.especie}}" {% endif %}  class="form-control" >
+  </div>
+
+  <button type="submit" class="btn btn-primary" >
+    {% if accion %}      {#Cambio del texto del boton#}
+      Editar
+    {% else  %}
+      Añadir 
+    {% endif %} 
+  </button>
+</form>
