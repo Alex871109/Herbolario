@@ -8,47 +8,28 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Infocomercial
- *
- * @ORM\Table(name="infocomercial", indexes={@ORM\Index(name="FKInfoComerc79765", columns={"PlantaID"}), @ORM\Index(name="FKInfoComerc148513", columns={"HerbolarioID"})})
- * @ORM\Entity(repositoryClass=InfocomercialRepository::Class)
  */
+#[ORM\Table(name: 'infocomercial')]
+#[ORM\Index(name: 'FKInfoComerc79765', columns: ['PlantaID'])]
+#[ORM\Index(name: 'FKInfoComerc148513', columns: ['HerbolarioID'])]
+#[ORM\Entity(repositoryClass: InfocomercialRepository::Class)]
 class Infocomercial
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_comercial", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idComercial;
+    #[ORM\Column(name: 'id_comercial', type: 'integer', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private readonly int $idComercial;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="Precio", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $precio;
+    #[ORM\Column(name: 'Precio', type: 'float', precision: 10, scale: 0, nullable: false)]
+    private ?float $precio = null;
 
-    /**
-     * @var Herbolario
-     *
-     * @ORM\ManyToOne(targetEntity="Herbolario")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="HerbolarioID", referencedColumnName="ID")
-     * })
-     */
-    private $herbolarioid;
+    #[ORM\JoinColumn(name: 'HerbolarioID', referencedColumnName: 'ID')]
+    #[ORM\ManyToOne(targetEntity: 'Herbolario')]
+    private ?Herbolario $herbolarioid = null;
 
-    /**
-     * @var Planta
-     *
-     * @ORM\ManyToOne(targetEntity="Planta")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="PlantaID", referencedColumnName="ID")
-     * })
-     */
-    private $plantaid;
+    #[ORM\JoinColumn(name: 'PlantaID', referencedColumnName: 'ID')]
+    #[ORM\ManyToOne(targetEntity: 'Planta')]
+    private ?Planta $plantaid = null;
 
     public function getIdComercial(): ?int
     {

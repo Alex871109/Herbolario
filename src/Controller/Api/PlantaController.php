@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use Exception;
 use App\Entity\Planta;
 use App\Entity\Usos;
 use App\Repository\InfocomercialRepository;
@@ -42,7 +43,7 @@ class PlantaController extends AbstractController
             throw $this->createNotFoundException('Planta not found');
         $dataResponse=['planta'=>$manager->object_to_array($planta,'form_planta')];
        if($request->getMethod()==='POST'){
-            $data_received=json_Decode($request->getContent()); //$request->getContent devuelve en 1 json el contenido del post
+            $data_received=json_Decode($request->getContent(), null, 512, JSON_THROW_ON_ERROR); //$request->getContent devuelve en 1 json el contenido del post
             $save_operation=$manager->save($data_received,$planta);
             if($save_operation['error'])
                 $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'uso' => null];
@@ -71,7 +72,7 @@ class PlantaController extends AbstractController
             $manager->delete($planta,$plantaRepository);
             $status = 200;
             $response = 'success';
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $status = 500;
             $response = $exception->getMessage();
         }
@@ -86,7 +87,7 @@ class PlantaController extends AbstractController
     public function new(Request $request, Manager $manager): JsonResponse
     {
         $planta=new Planta();
-        $data_received=json_Decode($request->getContent());
+        $data_received=json_Decode($request->getContent(), null, 512, JSON_THROW_ON_ERROR);
         $save_operation=$manager->save($data_received,$planta);
         
             if($save_operation['error'])

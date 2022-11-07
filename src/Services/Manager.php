@@ -22,14 +22,8 @@ use Symfony\Component\Serializer\Serializer;
 
 Class Manager
 {
-    private $entityManager;
-    private $herbolarioRepository;
-
-    public function __construct(EntityManagerInterface $entityManager,HerbolarioRepository $herbolariorepo)
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly HerbolarioRepository $herbolarioRepository)
     {
-        $this->entityManager=$entityManager;
-        $this->herbolarioRepository=$herbolariorepo;
-
     }
 
 
@@ -48,7 +42,7 @@ Class Manager
                 }
             }
 
-            $attr=ucfirst($key);
+            $attr=ucfirst((string) $key);
             if('Herbolario'!==$attr){           //Herbolario como parte de planta se edita diferente
                 $setmethod='set'.$attr;
                 $addmethod='add'.$attr;

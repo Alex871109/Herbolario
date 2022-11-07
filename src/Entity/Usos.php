@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Stringable;
 use App\Repository\UsosRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,48 +13,33 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Usos
- *
- * @ORM\Table(name="usos")
- * @ORM\Entity(repositoryClass=UsosRepository::Class)
  */
-class Usos
+#[ORM\Table(name: 'usos')]
+#[ORM\Entity(repositoryClass: UsosRepository::Class)]
+class Usos implements Stringable
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ID", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Groups("basic")
-     */
+    #[ORM\Column(name: 'ID', type: 'integer', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[Groups('basic')]
+    private ?int $id = null;
 
-    private $id;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="Nombre", type="string", length=255, nullable=true)
-     * @Groups("basic")
-     * @Groups("form_planta")
-     */
-    
-    private $nombre;
+    #[ORM\Column(name: 'Nombre', type: 'string', length: 255, nullable: true)]
+    #[Groups('basic')]
+    #[Groups('form_planta')]
+    private ?string $nombre = null;
 
     
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Planta", mappedBy="uso")
-     * @Groups("basic")
-     */
-    private $planta = array();
+    #[ORM\ManyToMany(targetEntity: 'Planta', mappedBy: 'uso')]
+    #[Groups('basic')]
+    private Collection $planta = [];
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->planta = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->planta = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,10 +93,10 @@ class Usos
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
 
-        return $this->nombre;
+        return (string) $this->nombre;
     }
 
 }

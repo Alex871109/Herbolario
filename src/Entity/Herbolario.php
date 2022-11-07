@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Stringable;
 use App\Repository\HerbolarioRepository;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,37 +10,24 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Herbolario
- *
- * @ORM\Table(name="herbolario")
- * @ORM\Entity(repositoryClass=HerbolarioRepository::Class)
  */
-class Herbolario
+#[ORM\Table(name: 'herbolario')]
+#[ORM\Entity(repositoryClass: HerbolarioRepository::Class)]
+class Herbolario implements Stringable
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ID", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Groups("basic")
-     */
-    private $id;
+    #[ORM\Column(name: 'ID', type: 'integer', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[Groups('basic')]
+    private ?int $id = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="Nombre", type="string", length=100, nullable=true)
-     * @Groups("basic")
-     */
-    private $nombre;
+    #[ORM\Column(name: 'Nombre', type: 'string', length: 100, nullable: true)]
+    #[Groups('basic')]
+    private ?string $nombre = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="URL", type="string", length=255, nullable=true)
-     * @Groups("basic")
-     */
-    private $url;
+    #[ORM\Column(name: 'URL', type: 'string', length: 255, nullable: true)]
+    #[Groups('basic')]
+    private ?string $url = null;
 
     public function getId(): ?int
     {
@@ -77,10 +65,10 @@ class Herbolario
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
 
-        return $this->nombre;
+        return (string) $this->nombre;
     }
 
 

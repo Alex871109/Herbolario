@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Stringable;
 use App\Repository\PlantaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,70 +11,43 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Planta
- *
- * @ORM\Table(name="planta")
- * @ORM\Entity(repositoryClass=PlantaRepository::Class)
  */
-class Planta
+#[ORM\Table(name: 'planta')]
+#[ORM\Entity(repositoryClass: PlantaRepository::Class)]
+class Planta implements Stringable
 {
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="Especie", type="string", length=100, nullable=true)
-     * @Groups("form_planta")
-     */
-    private $especie;
+    #[ORM\Column(name: 'Especie', type: 'string', length: 100, nullable: true)]
+    #[Groups('form_planta')]
+    private ?string $especie = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ID", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Groups("form_planta")
-     */
-    private $id;
+    #[ORM\Column(name: 'ID', type: 'integer', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[Groups('form_planta')]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Nombre", type="string", length=100, nullable=false)
-     * @Groups("basic")
-     * @Groups("form_planta")
-     */
-    private $nombre;
+    #[ORM\Column(name: 'Nombre', type: 'string', length: 100, nullable: false)]
+    #[Groups('basic')]
+    #[Groups('form_planta')]
+    private ?string $nombre = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="Lugar", type="string", length=255, nullable=true)
-     * @Groups("form_planta")
-     */
-    private $lugar;
+    #[ORM\Column(name: 'Lugar', type: 'string', length: 255, nullable: true)]
+    #[Groups('form_planta')]
+    private ?string $lugar = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Usos", inversedBy="planta")
-     * @ORM\JoinTable(name="plantasusos",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="Planta", referencedColumnName="ID")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="Uso", referencedColumnName="ID")
-     *   }
-     * )
-     * @Groups("form_planta")
-     */
-   
-    private $uso = array();
+    #[ORM\JoinTable(name: 'plantasusos')]
+    #[ORM\JoinColumn(name: 'Planta', referencedColumnName: 'ID')]
+    #[ORM\InverseJoinColumn(name: 'Uso', referencedColumnName: 'ID')]
+    #[ORM\ManyToMany(targetEntity: 'Usos', inversedBy: 'planta')]
+    #[Groups('form_planta')]
+    private Collection $uso = [];
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->uso = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->uso = new ArrayCollection();
     }
 
     public function getEspecie(): ?string
@@ -149,7 +123,7 @@ class Planta
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
 
         return $this->nombre;

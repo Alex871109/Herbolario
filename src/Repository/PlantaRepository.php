@@ -46,7 +46,7 @@ class PlantaRepository extends ServiceEntityRepository
 {                                           // Este metodo lo hace a mano.    https://www.doctrine-project.org/projects/doctrine-orm/en/2.13/reference/working-with-associations.html#association-management-methods
     return $this->createQueryBuilder("p")
             ->where(':uso MEMBER OF p.uso')
-            ->setParameters(array('uso' => $uso))
+            ->setParameters(['uso' => $uso])
             ->getQuery()->getResult();
 }
 

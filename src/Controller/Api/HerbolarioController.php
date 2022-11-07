@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use Exception;
 use App\Entity\Herbolario;
 use App\Repository\HerbolarioRepository;
 use App\Repository\InfocomercialRepository;
@@ -38,7 +39,7 @@ class HerbolarioController extends AbstractController
         $dataResponse=['herbolario'=>$manager->object_to_array($herbolario,'basic')];
 
        if($request->getMethod()==='POST'){
-            $data_received=json_Decode($request->getContent()); //$request->getContent devuelve en 1 json el contenido del post
+            $data_received=json_Decode($request->getContent(), null, 512, JSON_THROW_ON_ERROR); //$request->getContent devuelve en 1 json el contenido del post
             $save_operation=$manager->save($data_received,$herbolario);
             if($save_operation['error'])
                 $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'herbolario' => null];
@@ -65,7 +66,7 @@ class HerbolarioController extends AbstractController
             $manager->delete($herbolario,$herbolarioRepository);
             $status = 200;
             $response = 'success';
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $status = 500;
             $response = $exception->getMessage();
         }
@@ -81,7 +82,7 @@ class HerbolarioController extends AbstractController
     public function new(HerbolarioRepository $herbolarioRepository,Request $request, Manager $manager): JsonResponse
     {
         $herbolario=new Herbolario();
-        $data_received=json_Decode($request->getContent());
+        $data_received=json_Decode($request->getContent(), null, 512, JSON_THROW_ON_ERROR);
         $save_operation=$manager->save($data_received,$herbolario);
             if($save_operation['error'])
                 $dataResponse = ['status' => 500, 'response' => 'fail'];

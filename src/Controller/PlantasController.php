@@ -21,6 +21,12 @@ class PlantasController extends AbstractController
     #[Route('/plantas/nueva', name: 'app_plantas_nueva')]
     public function nueva(Request $request,UsosRepository $usosRepository,HerbolarioRepository $herbolarioRepository,PlantaRepository $plantaRepository, EntityManagerInterface $entityManager): Response
     {
+        $nombre_uso = [];
+        $nombre_herbolario = [];
+        $precio = [];
+        $usos_array = [];
+        $herbolario_array = [];
+        $infocomercial_array = [];
         $planta=new Planta();
         $usos=$usosRepository->findAll();
         $herbolarios=$herbolarioRepository->findAll();
