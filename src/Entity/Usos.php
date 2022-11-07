@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Entity;
-use Stringable;
 use App\Repository\UsosRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Stringable;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * Usos
  */
 #[ORM\Table(name: 'usos')]
-#[ORM\Entity(repositoryClass: UsosRepository::Class)]
+#[ORM\Entity(repositoryClass: UsosRepository::class)]
 class Usos implements Stringable
 {
     #[ORM\Column(name: 'ID', type: 'integer', nullable: false)]
@@ -32,7 +32,7 @@ class Usos implements Stringable
     
     #[ORM\ManyToMany(targetEntity: 'Planta', mappedBy: 'uso')]
     #[Groups('basic')]
-    private Collection $planta = [];
+    private Collection $planta ;
 
     /**
      * Constructor
@@ -67,7 +67,7 @@ class Usos implements Stringable
     }
 
     /**
-     * @return Collection<int, Planta>
+     * @return Collection
      */
     public function getPlanta(): Collection
     {
