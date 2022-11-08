@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 
-#[Route('/Api/herbolario')]
+#[Route('/api/herbolario')]
 class HerbolarioController extends AbstractController
 {
     #[Route('/index', name: 'api_herbolario_index', methods: ['GET'])]

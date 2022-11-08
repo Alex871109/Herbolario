@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 
 
 
-#[Route('/Api/usos')]
+#[Route('/api/usos')]
 class UsosController extends AbstractController
 {
     #[Route('/index', name: 'api_usos_index', methods: ['GET'])]

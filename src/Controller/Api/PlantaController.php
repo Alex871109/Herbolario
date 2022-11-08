@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 
 
 
-#[Route('/Api/planta')]
+#[Route('/api/planta')]
 class PlantaController extends AbstractController
 {
     #[Route('/index', name: 'api_planta_index', methods: ['GET'])]
