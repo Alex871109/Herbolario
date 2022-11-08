@@ -63,7 +63,7 @@ class UsosController extends AbstractController
             throw $this->createNotFoundException('Uso not found');
         
         try {
-            $plantas=$plantaRepository->findByUso($uso); //Metodo mio, no de symfony
+            $plantas=$plantaRepository->findByUso($uso); //Metodo customizado mio, no de symfony
             foreach($plantas as $planta)
                $planta->removeUso($uso);
             $manager->update();

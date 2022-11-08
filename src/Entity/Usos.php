@@ -25,8 +25,8 @@ class Usos implements Stringable
     private ?int $id = null;
 
     #[ORM\Column(name: 'Nombre', type: 'string', length: 255, nullable: true)]
-    #[Groups('basic')]
-    #[Groups('form_planta')]
+    // #[Groups('basic')]
+     #[Groups(['form_planta', 'basic'])]
     private ?string $nombre = null;
 
     

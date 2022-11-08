@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * Planta
  */
 #[ORM\Table(name: 'planta')]
-#[ORM\Entity(repositoryClass: PlantaRepository::Class)]
+#[ORM\Entity(repositoryClass: PlantaRepository::class)]
 class Planta implements Stringable
 {
     #[ORM\Column(name: 'Especie', type: 'string', length: 100, nullable: true)]
@@ -27,8 +27,7 @@ class Planta implements Stringable
     private ?int $id = null;
 
     #[ORM\Column(name: 'Nombre', type: 'string', length: 100, nullable: false)]
-    #[Groups('basic')]
-    #[Groups('form_planta')]
+    #[Groups(['form_planta', 'basic'])]
     private ?string $nombre = null;
 
     #[ORM\Column(name: 'Lugar', type: 'string', length: 255, nullable: true)]
@@ -40,7 +39,7 @@ class Planta implements Stringable
     #[ORM\InverseJoinColumn(name: 'Uso', referencedColumnName: 'ID')]
     #[ORM\ManyToMany(targetEntity: 'Usos', inversedBy: 'planta')]
     #[Groups('form_planta')]
-    private Collection $uso = [];
+    private Collection $uso;
 
     /**
      * Constructor

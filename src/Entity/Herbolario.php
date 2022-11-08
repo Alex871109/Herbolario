@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * Herbolario
  */
 #[ORM\Table(name: 'herbolario')]
-#[ORM\Entity(repositoryClass: HerbolarioRepository::Class)]
+#[ORM\Entity(repositoryClass: HerbolarioRepository::class)]
 class Herbolario implements Stringable
 {
     #[ORM\Column(name: 'ID', type: 'integer', nullable: false)]

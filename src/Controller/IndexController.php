@@ -16,6 +16,7 @@ class IndexController extends AbstractController
     public function index(EntityManagerInterface $entityMI, PlantaRepository $pr, InfocomercialRepository $infocomercialRepository): Response
     {
         $plantas=$pr->findAll();
+        $herbolarios=[];
         foreach($plantas as $indice=>$planta){
             $info_comercial_array=$infocomercialRepository->findByPlantaid($planta);
             dump($info_comercial_array);

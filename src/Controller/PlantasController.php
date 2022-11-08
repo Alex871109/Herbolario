@@ -77,7 +77,7 @@ class PlantasController extends AbstractController
             $this->addFlash('success','La informacion de la Planta se añadió exitosamente');
             return $this->redirectToRoute('app_index');
         }
-        return $this->render('plantas/plantas_nueva.html.twig', [
+        return $this->render('Plantas/plantas_nueva.html.twig', [
             'accion' => false,
             'usos'=>$usos,
             'herbolarios'=>$herbolarios
