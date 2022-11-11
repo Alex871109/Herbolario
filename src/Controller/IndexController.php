@@ -4,16 +4,21 @@ namespace App\Controller;
 
 use App\Repository\InfocomercialRepository;
 use App\Repository\PlantaRepository;
+use Container4DhTMW2\PaginatorInterface_82dac15;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator as PaginationPaginator;
+use Knp\Component\Pager\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
-    public function index(EntityManagerInterface $entityMI, PlantaRepository $pr, InfocomercialRepository $infocomercialRepository): Response
+    public function index(EntityManagerInterface $entityMI, PlantaRepository $pr, InfocomercialRepository $infocomercialRepository,PaginatorInterface $paginator ,Request $request): Response
     {
         $plantas=$pr->findAll();
         $herbolarios=[];
@@ -30,10 +35,18 @@ class IndexController extends AbstractController
         }
         
        
+  
+        $pagination = $paginator->paginate(
+            $plantas, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+
        
         return $this->render('index/index.html.twig', [
             'plantas' => $plantas,
             'herbolarios'=>$herbolarios,
+            'pagination' => $pagination
         ]);
     }
 }

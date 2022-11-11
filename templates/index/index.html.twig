@@ -19,7 +19,7 @@
   </thead>
   <tbody>
   {% set i=0 %}
-  {% for planta in plantas %}
+  {% for planta in pagination %}
     <tr>
       <td> {{planta.nombre}}</td>
       <td> {{planta.especie}}</td>
@@ -40,6 +40,10 @@
   </tbody>
 </table>
       
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+
       
   </div>
 
