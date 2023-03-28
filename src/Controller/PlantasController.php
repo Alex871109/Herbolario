@@ -65,8 +65,8 @@ class PlantasController extends AbstractController
                 $usos_array[$i]=new Usos();
                 $herbolario_array[$i]=new Herbolario();
                 $infocomercial_array[$i]=new Infocomercial();
-                $usos_array[$i]=$usosRepository->findOneBy(['nombre' =>$nombre_uso[$i]]);// Si no lo pongo explisito , piensa que devuelve mas de 1 valor, o sea 1 array             
-                $herbolario_array[$i]=$herbolarioRepository->findOneBy(['nombre' =>$nombre_herbolario[$i]]); //Si no hago el findOneBy ve como q devuelve 1 array y luego no deja usar ->getId()
+                $usos_array[$i]=$usosRepository->findOneBy(['nombre' =>$nombre_uso[$i]]);            
+                $herbolario_array[$i]=$herbolarioRepository->findOneBy(['nombre' =>$nombre_herbolario[$i]]); 
                 $infocomercial_array[$i]->setPrecio((float)$precio[$i]);
                 $infocomercial_array[$i]->setHerbolarioid($herbolario_array[$i]);
                 $infocomercial_array[$i]->setPlantaid($planta);

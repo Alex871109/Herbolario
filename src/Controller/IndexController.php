@@ -4,12 +4,8 @@ namespace App\Controller;
 
 use App\Repository\InfocomercialRepository;
 use App\Repository\PlantaRepository;
-use Container4DhTMW2\PaginatorInterface_82dac15;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Pagination\Paginator as PaginationPaginator;
-use Knp\Component\Pager\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +33,7 @@ class IndexController extends AbstractController
        
   
         $pagination = $paginator->paginate(
-            $plantas, /* query NOT result */
+            $plantas, 
             $request->query->getInt('page', 1), /*page number*/
             2 /*limit per page*/
         );

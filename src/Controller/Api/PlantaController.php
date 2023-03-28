@@ -47,7 +47,7 @@ class PlantaController extends AbstractController
             $data_received=json_Decode($request->getContent()); //$request->getContent devuelve en 1 json el contenido del post
             $save_operation=$manager->save($data_received,$planta);
             if($save_operation['error'])
-                $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'uso' => null];
+                $dataResponse = ['status' => 500, 'response' => 'fail','method'=>'POST', 'mensaje' => $save_operation['msg']];
             else
                 $dataResponse=['status'=>200,'response'=>'success', 'method'=>'POST','planta'=>$manager->object_to_array($save_operation['entity'],'form_planta')];
         }
