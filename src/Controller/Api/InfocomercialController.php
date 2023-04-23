@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 
 
 #[Route('/api/infocomercial')]
-class UsosController extends AbstractController
+class InfocomercialController extends AbstractController
 {
     #[Route('/sortedbyplantprice', name: 'api_infocomercial_sortedbyplantprice', methods: ['GET'])]
     public function sortedbyplantprice(PlantaRepository $pr, InfocomercialRepository $infocomercialRepository,  Manager $manager): JsonResponse
