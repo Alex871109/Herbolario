@@ -101,4 +101,21 @@ class PlantaController extends AbstractController
     }
 
 
+    #[Route('/findby', name: 'api_planta_findby', methods: ['GET'])]
+    public function findby(Request $request, Manager $manager, PlantaRepository $plantaRepository): JsonResponse
+    {
+ 
+        $nombre = $request->query->get('nombre');
+        $result=$plantaRepository->findOneBy(['nombre'=>$nombre]);
+        
+        if(!$result)
+            $dataResponse = ['status' => 500, 'response' => 'fail', 'error'=> 'El objeto no existe en la Base de Datos'];
+        else
+            $dataResponse = ['status' => 200, 'response' => 'success', 'error'=> null];
+
+              
+        return $this->json($dataResponse,200);
+    }
+
+
 }
