@@ -50,9 +50,8 @@ class InfocomercialController extends AbstractController
     #[Route('/new', name: 'api_infocomercial_new', methods: ['POST'])]
     public function new(PlantaRepository $plantaRepository,HerbolarioRepository $herbolarioRepository,   Request $request, EntityManagerInterface $entityManagerInterface): JsonResponse
     {
-
         $infocomercials = json_decode($request->getContent(), true)['infocomercials'];
-        
+        dump($infocomercials);
         foreach ($infocomercials as $infocomercialData) {
             $infocomercial = new Infocomercial();
             $infocomercial->setPlantaid($plantaRepository->findOneBy(['nombre'=>$infocomercialData['planta_nombre']]));
@@ -60,9 +59,10 @@ class InfocomercialController extends AbstractController
             $infocomercial->setPrecio($infocomercialData['precio']);
             $entityManagerInterface->persist($infocomercial);
         }
-        
+    
         $entityManagerInterface->flush();
         return $this->json('success',200);
+     
     }
 
 
